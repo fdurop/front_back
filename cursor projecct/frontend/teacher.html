@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>教师界面 - fdurop智能问答助手</title>
+  <link rel="stylesheet" href="./styles.css">
+  <meta name="color-scheme" content="light dark">
+</head>
+<body>
+  <div class="app">
+    <!-- Header will be loaded here -->
+    <div id="headerContainer"></div>
+    
+    <main class="app-main">
+      <div class="teacher-welcome">
+        <div class="welcome-icon">🏫</div>
+        <h1 class="welcome-title">欢迎使用教师界面</h1>
+        <p class="welcome-subtitle">您已成功登录为教师身份</p>
+        
+      </div>
+      
+      
+      
+      <!-- 文件上传区域 -->
+      <div class="file-upload-section" id="uploadSection" hidden>
+        <h2 class="upload-title">教学资源上传</h2>
+        <div class="upload-area" id="uploadArea">
+          <div class="upload-icon"></div>
+          <p class="upload-text">拖拽文件到此处或点击选择文件</p>
+          <p class="upload-hint">支持 PDF、Word、PPT、图片等格式</p>
+          <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.txt" hidden>
+          <button class="upload-btn" onclick="document.getElementById('fileInput').click()">选择文件</button>
+        </div>
+        
+        <!-- 文件列表 -->
+        <div class="file-list" id="fileList">
+          <h3 class="file-list-title">已上传文件</h3>
+          <div class="file-items" id="fileItems">
+            <div class="no-files">暂无文件</div>
+          </div>
+        </div>
+        
+        <!-- 上传进度 -->
+        <div class="upload-progress" id="uploadProgress" hidden>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text" id="progressText">上传中... 0%</div>
+        </div>
+        
+        <!-- 状态消息 -->
+        <div class="status-message" id="statusMessage" hidden></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 先加载header组件 -->
+  <script src="./components/header-loader.js"></script>
+  <script>
+    // 等待header加载完成后再初始化教师界面
+    async function initializeTeacherApp() {
+      try {
+        // 加载header
+        await window.headerLoader.load();
+        
+        // 等待header完全加载
+        await window.headerLoader.waitForLoad();
+        
+        // 设置教师角色
+        window.headerLoader.setRoleText('teacher');
+        
+        // 初始化教师界面逻辑
+        initializeTeacherInterface();
+        
+      } catch (error) {
+        console.error('初始化教师界面失败:', error);
+        // 即使失败也要初始化界面
+        initializeTeacherInterface();
+      }
+    }
+    
+    // 初始化教师界面
+    function initializeTeacherInterface() {
+      // 确保当前角色是教师
+      if (localStorage.getItem('qa_user_role') !== 'teacher') {
+        localStorage.setItem('qa_user_role', 'teacher');
+      }
+      
+      // 初始化header按钮功能
+      initializeHeaderButtons();
+      
+      // 初始化其他功能...
+      initializeFileUpload();
+    }
+    
+    // 初始化header按钮功能
+    function initializeHeaderButtons() {
+      // 获取header中的按钮元素
+      const mockToggle = window.headerLoader.getElement('mockToggle');
+      const roleBtn = window.headerLoader.getElement('roleBtn');
+      const configBtn = window.headerLoader.getElement('configBtn');
+      const loginBtn = window.headerLoader.getElement('loginBtn');
+      const clearBtn = window.headerLoader.getElement('clearBtn');
+      const backendStatus = window.headerLoader.getElement('backendStatus');
+      
+      // 设置后端状态
+      if (backendStatus) {
+        backendStatus.textContent = '后端：检查中…';
+      }
+      
+      // Mock切换功能
+      if (mockToggle) {
+        // 恢复mock状态
+        try {
+          const mock = localStorage.getItem('qa_mock_mode');
+          mockToggle.checked = mock === '1';
+        } catch (e) {}
+        
+        mockToggle.addEventListener('change', () => {
+          localStorage.setItem('qa_mock_mode', mockToggle.checked ? '1' : '0');
+        });
+      }
+      
+      // 角色切换功能
+      if (roleBtn) {
+        roleBtn.addEventListener('click', () => {
+          const currentRole = localStorage.getItem('qa_user_role');
+          const nextRole = currentRole === 'student' ? 'teacher' : 'student';
+          localStorage.setItem('qa_user_role', nextRole);
+          
+          // 根据新角色跳转页面
+          if (nextRole === 'student') {
+            window.location.href = './index.html';
+          } else {
+            window.location.href = './teacher.html';
+          }
+        });
+      }
+      
+      // 设置后端功能
+      if (configBtn) {
+        configBtn.addEventListener('click', async () => {
+          try {
+            const current = localStorage.getItem('qa_api_endpoint') || 'http://127.0.0.1:8000/api/ask';
+            const next = prompt('请输入后端 /api/ask 地址：', current);
+            if (!next) return;
+            localStorage.setItem('qa_api_endpoint', next);
+            alert('已保存。');
+          } catch (e) {}
+        });
+      }
+      
+      // 登录功能
+      if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+          // 在教师界面，直接显示登录成功
+          alert('教师身份已自动登录');
+        });
+      }
+      
+      // 清空对话功能
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          if (confirm('确定要清空当前对话吗？')) {
+            // 在教师界面，这个功能可能不需要，但保持一致性
+            alert('教师界面无需清空对话');
+          }
+        });
+      }
+      
+      // 删除了返回学生界面按钮的代码
+    }
+    
+    // 初始化文件上传功能
+    function initializeFileUpload() {
+      // 上传区域元素
+      const uploadSection = document.getElementById('uploadSection');
+      // 文件上传相关元素
+      const uploadArea = document.getElementById('uploadArea');
+      const fileInput = document.getElementById('fileInput');
+      const fileItems = document.getElementById('fileItems');
+      const uploadProgress = document.getElementById('uploadProgress');
+      const progressFill = document.getElementById('progressFill');
+      const progressText = document.getElementById('progressText');
+      const statusMessage = document.getElementById('statusMessage');
+      
+      // 后端API地址
+      const API_BASE = 'http://127.0.0.1:8000';
+      
+      // 检查后端连接，仅更新头部状态展示，使之与 student 一致
+      async function checkBackendConnection() {
+        try {
+          const response = await fetch(`${API_BASE}/health`, {
+            method: 'GET',
+            mode: 'cors'
+          });
+          
+          if (response.ok) {
+            // 更新header中的后端状态
+            const headerBackendStatus = window.headerLoader.getElement('backendStatus');
+            if (headerBackendStatus) {
+              headerBackendStatus.textContent = '后端：在线';
+              headerBackendStatus.title = API_BASE;
+            }
+            uploadSection.hidden = false;
+            loadFileList();
+          } else {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          
+        } catch (error) {
+          console.error('后端连接失败:', error);
+          // 更新header中的后端状态
+          const headerBackendStatus = window.headerLoader.getElement('backendStatus');
+          if (headerBackendStatus) {
+            headerBackendStatus.textContent = '后端：离线（将使用示例答案）';
+            headerBackendStatus.title = '请启动后端或设置可用的 /api/ask 地址';
+          }
+          // 仍允许显示上传区域，由用户自行尝试
+          uploadSection.hidden = false;
+        }
+      }
+      // 页面加载时检查一次
+      checkBackendConnection();
+      
+      // 拖拽上传
+      uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('drag-over');
+      });
+      
+      uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('drag-over');
+      });
+      
+      uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('drag-over');
+        const files = e.dataTransfer.files;
+        handleFiles(files);
+      });
+      
+      // 点击选择文件
+      fileInput.addEventListener('change', (e) => {
+        const files = e.target.files;
+        handleFiles(files);
+      });
+      
+      // 处理文件
+      function handleFiles(files) {
+        Array.from(files).forEach(file => {
+          uploadFile(file);
+        });
+      }
+      
+      // 上传文件到后端
+      async function uploadFile(file) {
+        try {
+          // 显示上传进度
+          uploadProgress.hidden = false;
+          progressFill.style.width = '0%';
+          progressText.textContent = '准备上传...';
+          
+          // 创建FormData
+          const formData = new FormData();
+          formData.append('file', file);
+          
+          // 添加认证信息
+          const token = localStorage.getItem('qa_auth_token');
+          const role = localStorage.getItem('qa_user_role');
+          
+          // 发送上传请求
+          const response = await fetch(`${API_BASE}/api/upload`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Authorization': token ? `Bearer ${token}` : '',
+              'X-User-Role': role || 'teacher'
+            },
+            body: formData
+          });
+          
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP ${response.status}: ${errorText}`);
+          }
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            // 上传成功
+            progressFill.style.width = '100%';
+            progressText.textContent = '上传完成！';
+            
+            // 显示成功消息
+            showStatus('文件上传成功！', 'success');
+            
+            // 重新加载文件列表
+            setTimeout(() => {
+              loadFileList();
+              uploadProgress.hidden = true;
+            }, 1000);
+            
+          } else {
+            throw new Error(result.error || '上传失败');
+          }
+          
+        } catch (error) {
+          console.error('上传失败:', error);
+          progressText.textContent = '上传失败';
+          showStatus(`上传失败: ${error.message}`, 'error');
+          
+          setTimeout(() => {
+            uploadProgress.hidden = true;
+          }, 2000);
+        }
+      }
+      
+      // 加载文件列表
+      async function loadFileList() {
+        try {
+          const token = localStorage.getItem('qa_auth_token');
+          const role = localStorage.getItem('qa_user_role');
+          
+          const response = await fetch(`${API_BASE}/api/files`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+              'Authorization': token ? `Bearer ${token}` : '',
+              'X-User-Role': role || 'teacher'
+            }
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            renderFileList(result.files);
+          } else {
+            throw new Error(result.error || '获取文件列表失败');
+          }
+          
+        } catch (error) {
+          console.error('获取文件列表失败:', error);
+          showStatus(`获取文件列表失败: ${error.message}`, 'error');
+        }
+      }
+      
+      // 渲染文件列表
+      function renderFileList(files) {
+        fileItems.innerHTML = '';
+        
+        if (files.length === 0) {
+          const noFiles = document.createElement('div');
+          noFiles.className = 'no-files';
+          noFiles.textContent = '暂无文件';
+          fileItems.appendChild(noFiles);
+        }
+        
+        files.forEach(file => {
+          const fileItem = document.createElement('div');
+          fileItem.className = 'file-item';
+          fileItem.innerHTML = `
+            <div class="file-info">
+              <span class="file-icon">${getFileIcon(file.filename)}</span>
+              <div class="file-details">
+                <div class="file-name">${file.filename}</div>
+                <div class="file-size">${formatFileSize(file.size)}</div>
+              </div>
+            </div>
+            <div class="file-actions">
+              <button class="file-action-btn" onclick="deleteFile('${file.filename}')" title="删除文件">🗑️</button>
+            </div>
+          `;
+          fileItems.appendChild(fileItem);
+        });
+      }
+      
+      // 删除文件
+      window.deleteFile = async function(filename) {
+        if (!confirm(`确定要删除文件 "${filename}" 吗？`)) {
+          return;
+        }
+        
+        try {
+          const token = localStorage.getItem('qa_auth_token');
+          const role = localStorage.getItem('qa_user_role');
+          
+          const response = await fetch(`${API_BASE}/api/files/${encodeURIComponent(filename)}`, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+              'Authorization': token ? `Bearer ${token}` : '',
+              'X-User-Role': role || 'teacher'
+            }
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            showStatus('文件删除成功！', 'success');
+            loadFileList(); // 重新加载文件列表
+          } else {
+            throw new Error(result.error || '删除失败');
+          }
+          
+        } catch (error) {
+          console.error('删除文件失败:', error);
+          showStatus(`删除文件失败: ${error.message}`, 'error');
+        }
+      }
+      
+      // 获取文件图标
+      function getFileIcon(filename) {
+        const ext = filename.split('.').pop().toLowerCase();
+        const iconMap = {
+          'pdf': '',
+          'doc': '📝',
+          'docx': '',
+          'ppt': '📊',
+          'pptx': '',
+          'jpg': '️',
+          'jpeg': '🖼️',
+          'png': '🖼️',
+          'gif': '🖼️',
+          'txt': '📄'
+        };
+        return iconMap[ext] || '📁';
+      }
+      
+      // 格式化文件大小
+      function formatFileSize(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+      }
+      
+      // 显示状态消息
+      function showStatus(message, type = 'info') {
+        statusMessage.textContent = message;
+        statusMessage.className = `status-message ${type}`;
+        statusMessage.hidden = false;
+        
+        setTimeout(() => {
+          statusMessage.hidden = true;
+        }, 3000);
+      }
+    }
+    
+    // 页面加载完成后初始化
+    window.addEventListener('load', initializeTeacherApp);
+  </script>
+</body>
+</html>

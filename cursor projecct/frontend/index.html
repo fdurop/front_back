@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>简易问答界面</title>
+  <link rel="stylesheet" href="./styles.css">
+  <meta name="color-scheme" content="light dark">
+</head>
+<body>
+  <div class="app">
+    <!-- Header will be loaded here -->
+    <div id="headerContainer"></div>
+    
+    <main class="app-main">
+      <div id="messages" class="messages" aria-live="polite" aria-busy="false"></div>
+    </main>
+    <footer class="composer">
+      <textarea id="input" rows="1" placeholder="请输入你的问题…（Enter 发送，Shift+Enter 换行）" autocomplete="off"></textarea>
+      <button id="sendBtn" class="primary-btn">发送</button>
+    </footer>
+  </div>
+  
+  <!-- 登录模态框 -->
+  <div id="loginModal" class="modal-overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <div class="modal-header">
+        <div id="loginTitle" class="modal-title">登录</div>
+        <button id="loginClose" class="secondary-btn" aria-label="关闭">✕</button>
+      </div>
+      <!-- 登录表单 -->
+      <form id="loginForm" class="modal-body">
+        <div class="form-group">
+          <label for="loginUsername">用户名</label>
+          <input id="loginUsername" type="text" placeholder="请输入用户名" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">密码</label>
+          <input id="loginPassword" type="password" placeholder="请输入密码" autocomplete="current-password" required>
+        </div>
+        <div id="loginError" class="form-error" role="alert" hidden></div>
+        <div class="modal-footer">
+          <button type="button" id="loginCancel" class="secondary-btn">取消</button>
+          <button type="button" id="goRegister" class="secondary-btn">去注册</button>
+          <button type="submit" id="loginSubmit" class="primary-btn">登录</button>
+        </div>
+      </form>
+
+      <!-- 注册表单 -->
+      <form id="registerForm" class="modal-body" hidden>
+        <div class="form-group">
+          <label for="registerUsername">用户名</label>
+          <input id="registerUsername" type="text" placeholder="请输入用户名" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">密码</label>
+          <input id="registerPassword" type="password" placeholder="请输入密码" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+          <label for="registerConfirm">确认密码</label>
+          <input id="registerConfirm" type="password" placeholder="请再次输入密码" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+          <label for="registerRole">选择身份</label>
+          <select id="registerRole">
+            <option value="student">学生</option>
+            <option value="teacher">老师</option>
+          </select>
+        </div>
+        <div id="registerError" class="form-error" role="alert" hidden></div>
+        <div class="modal-footer">
+          <button type="button" id="registerCancel" class="secondary-btn">取消</button>
+          <button type="button" id="goLogin" class="secondary-btn">去登录</button>
+          <button type="submit" id="registerSubmit" class="primary-btn">注册</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 先加载header组件 -->
+  <script src="./components/header-loader.js"></script>
+  <script>
+    // 等待header加载完成后再加载app.js
+    async function initializeApp() {
+      try {
+        // 加载header
+        await window.headerLoader.load();
+        
+        // 等待header完全加载
+        await window.headerLoader.waitForLoad();
+        
+        // 设置学生角色
+        window.headerLoader.setRoleText('student');
+        
+        // 加载主应用脚本
+        const script = document.createElement('script');
+        script.src = './app.js';
+        document.body.appendChild(script);
+        
+      } catch (error) {
+        console.error('初始化应用失败:', error);
+        // 即使失败也要尝试加载app.js
+        const script = document.createElement('script');
+        script.src = './app.js';
+        document.body.appendChild(script);
+      }
+    }
+    
+    // 页面加载完成后初始化
+    window.addEventListener('load', initializeApp);
+  </script>
+</body>
+</html>
+
+
