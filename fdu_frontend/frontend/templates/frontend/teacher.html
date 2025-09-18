@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>教师界面 - fdurop智能问答助手</title>
+  <link rel="stylesheet" href="{% static 'css/teacher.css' %}">
+  <meta name="color-scheme" content="light dark">
+</head>
+<body>
+  <div class="app">
+    <!-- 简化 Header -->
+    <header class="app-header">
+      <div class="title">fdurop——智能问答助手</div>
+      <div class="actions">
+        <!-- 切换身份按钮 -->
+        <button id="roleBtn" class="secondary-btn" title="切换身份">切换到学生身份</button>
+        <span id="backendStatus" class="status-badge">后端：检查中…</span>
+      </div>
+    </header>
+
+    <!-- 主体 -->
+    <main class="app-main">
+      <!-- 欢迎信息 -->
+      <section class="teacher-welcome">
+        <div class="welcome-icon">🏫</div>
+        <h1 class="welcome-title">欢迎使用教师界面</h1>
+        <p class="welcome-subtitle">您已成功登录为教师身份</p>
+      </section>
+
+      <!-- 文件上传区 -->
+      <section class="file-upload-section" id="uploadSection" hidden>
+        <h2 class="upload-title">教学资源上传</h2>
+        <div class="upload-area" id="uploadArea">
+          <p class="upload-text">拖拽文件到此处或点击选择文件</p>
+          <p class="upload-hint">支持 PDF、Word、PPT、图片等格式</p>
+          <input type="file" id="fileInput" multiple
+                 accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.gif,.txt" hidden>
+          <button class="upload-btn" id="chooseFileBtn">选择文件</button>
+        </div>
+
+        <div class="file-list" id="fileList">
+          <h3 class="file-list-title">已上传文件</h3>
+          <div class="file-items" id="fileItems">
+            <div class="no-files">暂无文件</div>
+          </div>
+        </div>
+
+        <div class="upload-progress" id="uploadProgress" hidden>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text" id="progressText">上传中... 0%</div>
+        </div>
+
+        <div class="status-message" id="statusMessage" hidden></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 脚本 -->
+  <script>
+    // 简单 header 逻辑
+    document.getElementById('roleBtn')?.addEventListener('click', () => {
+      localStorage.setItem('qa_user_role', 'student');
+      window.location.href = '/';
+    });
+  </script>
+  <script src="{% static 'js/teacher.js' %}"></script>
+</body>
+</html>

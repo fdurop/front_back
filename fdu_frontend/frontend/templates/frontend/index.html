@@ -1,0 +1,107 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>简易问答界面</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta name="color-scheme" content="light dark">
+</head>
+<body>
+<div class="app">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="title">fdurop——智能问答助手</div>
+    <div class="actions">
+      <label class="toggle">
+        <input type="checkbox" id="mockToggle">
+        <span>使用示例答案</span>
+      </label>
+      <span id="backendStatus" class="status-badge" title="后端连接状态">后端：检查中…</span>
+      <button id="roleBtn" class="secondary-btn" title="切换身份">身份：学生</button>
+      <button id="configBtn" class="secondary-btn" title="设置后端地址">设置后端</button>
+      <button id="loginBtn" class="secondary-btn" title="登录账号">登录</button>
+      <button id="clearBtn" class="secondary-btn" title="清空对话">清空</button>
+    </div>
+  </header>
+
+  <!-- 主体消息区 -->
+  <main class="app-main">
+    <div id="messages" class="messages" aria-live="polite" aria-busy="false"></div>
+  </main>
+
+  <!-- 底部输入区 -->
+  <footer class="composer">
+    <textarea id="input" rows="1" placeholder="请输入你的问题…（Enter 发送，Shift+Enter 换行）" autocomplete="off"></textarea>
+    <button id="sendBtn" class="primary-btn">发送</button>
+  </footer>
+</div>
+
+<!-- Header Loader & 主应用脚本 -->
+<script src="{% static 'js/header-loader.js' %}"></script>
+<script src="{% static 'js/chat.js' %}"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // 绑定 header 按钮
+    const mockToggle = document.getElementById('mockToggle');
+    const roleBtn = document.getElementById('roleBtn');
+    const configBtn = document.getElementById('configBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const backendStatus = document.getElementById('backendStatus');
+
+    // 初始化 mockToggle
+    if (mockToggle) {
+      mockToggle.checked = localStorage.getItem('qa_mock_mode') === '1';
+      mockToggle.addEventListener('change', () => {
+        localStorage.setItem('qa_mock_mode', mockToggle.checked ? '1' : '0');
+      });
+    }
+
+    // 初始化身份按钮
+    function getCurrentRole() {
+      const path = window.location.pathname;
+      if (path.startsWith('/teacher')) {
+        localStorage.setItem('qa_user_role', 'teacher');
+        return 'teacher';
+      }
+      const stored = localStorage.getItem('qa_user_role');
+      return stored === 'teacher' ? 'teacher' : 'student';
+    }
+
+    function setRoleText(role) {
+      if (roleBtn) roleBtn.textContent = '身份：' + (role === 'teacher' ? '教师' : '学生');
+    }
+
+    roleBtn?.addEventListener('click', () => {
+      const currentRole = getCurrentRole();
+      const nextRole = currentRole === 'student' ? 'teacher' : 'student';
+      localStorage.setItem('qa_user_role', nextRole);
+      window.location.pathname = nextRole === 'teacher' ? '/teacher/' : '/';
+    });
+
+    setRoleText(getCurrentRole());
+
+    // 设置后端按钮
+    configBtn?.addEventListener('click', () => {
+      const current = localStorage.getItem('qa_api_endpoint') || 'http://127.0.0.1:5000/api/qa/';
+      const next = prompt('请输入后端 /api/qa 地址：', current);
+      if (next) {
+        localStorage.setItem('qa_api_endpoint', next.endsWith('/') ? next : next + '/');
+        backendStatus.textContent = '后端：检查中…';
+        fetch(localStorage.getItem('qa_api_endpoint'), { method: 'OPTIONS' })
+          .then(() => backendStatus.textContent = '后端：在线')
+          .catch(() => backendStatus.textContent = '后端：不可用');
+      }
+    });
+
+    // 清空按钮
+    clearBtn?.addEventListener('click', () => {
+      const messages = document.getElementById('messages');
+      if (messages) messages.innerHTML = '';
+    });
+  });
+</script>
+</body>
+</html>
