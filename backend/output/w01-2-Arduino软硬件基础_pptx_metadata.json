@@ -1,0 +1,391 @@
+{
+  "processing_date": "2025-09-20 13:35:59",
+  "source_file": "w01-2-Arduino软硬件基础",
+  "source_path": "C:\\Users\\86131\\Desktop\\fdurop\\backend\\input\\w01-2-Arduino软硬件基础.pptx",
+  "file_type": "PPTX",
+  "processing_method": "advanced_zip_xml_parsing",
+  "statistics": {
+    "total_slides": 13,
+    "slides_with_text": 13,
+    "slides_with_tables": 4,
+    "total_tables": 4,
+    "total_table_rows": 36,
+    "total_table_columns": 15,
+    "slides_with_images": 10,
+    "total_images_extracted": 17,
+    "images_via_traditional": 0,
+    "images_via_zip_parsing": 17,
+    "total_images_in_media": 17
+  },
+  "slide_image_mapping": {
+    "10": [
+      "image15.png",
+      "image12.png",
+      "image14.png",
+      "image18.png",
+      "image13.png",
+      "image16.png"
+    ],
+    "11": [
+      "image160.png"
+    ],
+    "13": [
+      "image19.png"
+    ],
+    "3": [
+      "image2.png"
+    ],
+    "4": [
+      "image3.png"
+    ],
+    "5": [
+      "image5.png",
+      "image4.png"
+    ],
+    "6": [
+      "image6.png"
+    ],
+    "7": [
+      "image8.png",
+      "image7.png"
+    ],
+    "8": [
+      "image10.png"
+    ],
+    "9": [
+      "image11.png"
+    ]
+  },
+  "files": {
+    "text_files": [
+      {
+        "type": "ppt_text",
+        "page": 1,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_1.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 2,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_2.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 3,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_3.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 4,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_4.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 5,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_5.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 6,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_6.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 7,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_7.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 8,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_8.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 9,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_9.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 10,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_10.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 11,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_11.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 12,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_12.json"
+      },
+      {
+        "type": "ppt_text",
+        "page": 13,
+        "file": "output/text/w01-2-Arduino软硬件基础_slide_13.json"
+      }
+    ],
+    "table_files": [
+      {
+        "type": "ppt_table",
+        "page": 11,
+        "table_index": 1,
+        "file": "output/tables/w01-2-Arduino软硬件基础_slide_11_table_1.csv",
+        "metadata_file": "output/tables/w01-2-Arduino软硬件基础_slide_11_table_1.json",
+        "dimensions": {
+          "rows": 18,
+          "columns": 4
+        },
+        "position": {
+          "left": 6.546445756780402,
+          "top": 0.08318678915135608,
+          "width": 4.580818022747157,
+          "height": 6.933333333333334
+        },
+        "extraction_method": "python_pptx_optimized"
+      },
+      {
+        "type": "ppt_table",
+        "page": 11,
+        "table_index": 2,
+        "file": "output/tables/w01-2-Arduino软硬件基础_slide_11_table_2.csv",
+        "metadata_file": "output/tables/w01-2-Arduino软硬件基础_slide_11_table_2.json",
+        "dimensions": {
+          "rows": 5,
+          "columns": 4
+        },
+        "position": {
+          "left": 1.185627734033246,
+          "top": 4.2303401137357834,
+          "width": 4.862300962379702,
+          "height": 2.1666666666666665
+        },
+        "extraction_method": "python_pptx_optimized"
+      },
+      {
+        "type": "ppt_table",
+        "page": 12,
+        "table_index": 1,
+        "file": "output/tables/w01-2-Arduino软硬件基础_slide_12_table_1.csv",
+        "metadata_file": "output/tables/w01-2-Arduino软硬件基础_slide_12_table_1.json",
+        "dimensions": {
+          "rows": 7,
+          "columns": 3
+        },
+        "position": {
+          "left": 0.8734153543307087,
+          "top": 1.5444510061242345,
+          "width": 11.594937664041995,
+          "height": 5.104159011373579
+        },
+        "extraction_method": "python_pptx_optimized"
+      },
+      {
+        "type": "ppt_table",
+        "page": 13,
+        "table_index": 1,
+        "file": "output/tables/w01-2-Arduino软硬件基础_slide_13_table_1.csv",
+        "metadata_file": "output/tables/w01-2-Arduino软硬件基础_slide_13_table_1.json",
+        "dimensions": {
+          "rows": 6,
+          "columns": 4
+        },
+        "position": {
+          "left": 3.9389938757655294,
+          "top": 4.282436570428697,
+          "width": 8.658228346456692,
+          "height": 2.6666666666666665
+        },
+        "extraction_method": "python_pptx_optimized"
+      }
+    ],
+    "image_files_traditional": [],
+    "image_files_zip": [
+      {
+        "type": "ppt_image_zip",
+        "page": 10,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_10_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_10_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image15.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 10,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_10_img_2_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_10_img_2_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image12.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 10,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_10_img_3_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_10_img_3_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image14.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 10,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_10_img_4_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_10_img_4_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image18.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 10,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_10_img_5_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_10_img_5_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image13.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 10,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_10_img_6_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_10_img_6_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image16.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 11,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_11_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_11_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image160.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 13,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_13_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_13_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image19.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 3,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_3_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_3_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image2.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 4,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_4_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_4_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image3.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 5,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_5_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_5_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image5.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 5,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_5_img_2_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_5_img_2_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image4.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 6,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_6_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_6_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image6.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 7,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_7_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_7_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image8.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 7,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_7_img_2_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_7_img_2_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image7.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 8,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_8_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_8_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image10.png"
+      },
+      {
+        "type": "ppt_image_zip",
+        "page": 9,
+        "file": "output/images\\w01-2-Arduino软硬件基础_slide_9_img_1_zip.png",
+        "description_file": "output\\images\\w01-2-Arduino软硬件基础_slide_9_img_1_zip_desc.json",
+        "extraction_method": "zip_xml_parsing",
+        "original_filename": "image11.png"
+      }
+    ]
+  },
+  "table_analysis": {
+    "positions": [
+      {
+        "left": 6.546445756780402,
+        "top": 0.08318678915135608,
+        "width": 4.580818022747157,
+        "height": 6.933333333333334
+      },
+      {
+        "left": 1.185627734033246,
+        "top": 4.2303401137357834,
+        "width": 4.862300962379702,
+        "height": 2.1666666666666665
+      },
+      {
+        "left": 0.8734153543307087,
+        "top": 1.5444510061242345,
+        "width": 11.594937664041995,
+        "height": 5.104159011373579
+      },
+      {
+        "left": 3.9389938757655294,
+        "top": 4.282436570428697,
+        "width": 8.658228346456692,
+        "height": 2.6666666666666665
+      }
+    ],
+    "position_stats": {
+      "avg_left": 3.1361206802274717,
+      "avg_top": 2.535103619860018,
+      "avg_width": 7.424071248906386,
+      "avg_height": 4.217706419510061
+    }
+  },
+  "processing_info": {
+    "extraction_methods": [
+      "python-pptx",
+      "zip_xml_parsing"
+    ],
+    "image_formats_supported": [
+      "PNG",
+      "WMF",
+      "EMF",
+      "JPEG"
+    ],
+    "table_extraction_enhanced": true,
+    "table_position_tracking": true,
+    "clip_descriptions_generated": true,
+    "output_format": "JSON/CSV"
+  }
+}

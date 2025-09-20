@@ -1,0 +1,6 @@
+{
+  "type": "ppt_text",
+  "page": 3,
+  "source": "w01-2-Arduino软硬件基础_slide_3",
+  "raw_text": "§1 Arduino Uno\n\n微控制单元（Microcontroller Unit，MCU）—— 通常用于底层驱动控制\n单片微型计算机（Single Chip Microcomputer）或者单片机。\n把中央处理器（CPU）的频率与规格做适当缩减，并将内存、计数器、UART等周边接口，整合在单一芯片上，形成芯片级的计算机，为不同的应用场合做不同组合控制。\n手机、PC外围设备、汽车电子、电机、机器臂的控制等，都用到MCU。\nArduino是一款便捷灵活、方便上手的开源电子原型平台。\n硬件：各种型号的Arduino板，如 Uno、Nano、Mega 等。\n软件：Arduino IDE\n官网：https://www.arduino.cc\n在线模拟器：https://wokwi.com/arduino\n\n13-"
+}

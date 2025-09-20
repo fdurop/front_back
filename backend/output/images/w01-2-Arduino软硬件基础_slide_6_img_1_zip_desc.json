@@ -1,0 +1,25 @@
+{
+  "image_path": "output/images\\w01-2-Arduino软硬件基础_slide_6_img_1_zip.png",
+  "clip_descriptions": [
+    {
+      "description": "表格",
+      "confidence": 0.051270030438899994
+    },
+    {
+      "description": "数学公式",
+      "confidence": 0.05084419995546341
+    },
+    {
+      "description": "分子结构",
+      "confidence": 0.05082869902253151
+    },
+    {
+      "description": "代码",
+      "confidence": 0.05080033466219902
+    },
+    {
+      "description": "科学图表",
+      "confidence": 0.05054962635040283
+    }
+  ]
+}

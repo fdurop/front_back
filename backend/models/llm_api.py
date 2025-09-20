@@ -52,6 +52,7 @@ def call_ollama(question):
     context = "\n".join(context_list)  # 每个元素换行
     prompt = build_prompt(question, context)
 
+    print(prompt)
     payload = {
         "model": "deepseek-r1:1.5b",
         "prompt": prompt,

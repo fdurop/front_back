@@ -1,0 +1,24 @@
+{
+  "slide_number": 5,
+  "source_file": "w01-2-Arduino软硬件基础",
+  "equations_count": 2,
+  "equations": [
+    {
+      "slide_number": 5,
+      "shape_index": 2,
+      "type": "formula_image",
+      "image_path": "output/images\\formula_slide_5_shape_2.png",
+      "latex": null,
+      "conversion_success": false
+    },
+    {
+      "slide_number": 5,
+      "shape_index": 4,
+      "type": "formula_image",
+      "image_path": "output/images\\formula_slide_5_shape_4.png",
+      "latex": null,
+      "conversion_success": false
+    }
+  ],
+  "processing_date": "2025-09-20 13:35:53.311326"
+}

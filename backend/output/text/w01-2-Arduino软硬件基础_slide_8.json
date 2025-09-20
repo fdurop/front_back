@@ -1,0 +1,6 @@
+{
+  "type": "ppt_text",
+  "page": 8,
+  "source": "w01-2-Arduino软硬件基础_slide_8",
+  "raw_text": "§3 实践：熟悉Arduino Uno\n\n板载LED的闪烁控制\n数字端口的用法\n固定周期，调整明暗的时长占比。\n\n13-\n\n端口初始化：说明该数字端口用于输入还是输出。只需运行一次。\n\n调节LED的亮度，需反复运行\n\nw01-s2-blink.ino"
+}

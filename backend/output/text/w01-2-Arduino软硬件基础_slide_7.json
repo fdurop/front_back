@@ -1,0 +1,6 @@
+{
+  "type": "ppt_text",
+  "page": 7,
+  "source": "w01-2-Arduino软硬件基础_slide_7",
+  "raw_text": "§3 实践：熟悉Arduino Uno\n\nHello World !\n\n13-\n\n串口：一种数字通信接口。\nUSB就是一种串口。\n\nw01-s1-helloArduino.ino"
+}

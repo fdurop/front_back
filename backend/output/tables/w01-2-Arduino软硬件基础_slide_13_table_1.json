@@ -1,0 +1,37 @@
+{
+  "type": "ppt_table",
+  "source": "w01-2-Arduino软硬件基础_slide_13",
+  "slide_number": 13,
+  "table_index": 1,
+  "dimensions": {
+    "rows": 6,
+    "columns": 4
+  },
+  "position": {
+    "left": 3.9389938757655294,
+    "top": 4.282436570428697,
+    "width": 8.658228346456692,
+    "height": 2.6666666666666665
+  },
+  "data_preview": [
+    [
+      "数字",
+      "摩斯码",
+      "数字",
+      "摩斯码"
+    ],
+    [
+      "0",
+      "– – – – –",
+      "5",
+      "• • • • •"
+    ],
+    [
+      "1",
+      "• – – – –",
+      "6",
+      "– • • • •"
+    ]
+  ],
+  "csv_file": "output/tables/w01-2-Arduino软硬件基础_slide_13_table_1.csv"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "ppt_text",
+  "page": 6,
+  "source": "w01-2-Arduino软硬件基础_slide_6",
+  "raw_text": "§2 Arduino IDE\n\n13-\n\n从官网或eLearning下载\n\nsetup()：只运行一次的初始化代码\nloop()：需反复运行的代码"
+}
