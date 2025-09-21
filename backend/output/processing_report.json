@@ -1,0 +1,31 @@
+{
+  "status": "completed",
+  "processing_date": "2025-09-20 17:21:00",
+  "input_directory": "C:\\Users\\86131\\Desktop\\fdurop\\backend\\input",
+  "output_directory": "C:\\Users\\86131\\Desktop\\fdurop\\backend\\output",
+  "total_files": 1,
+  "processed_files": 1,
+  "failed_files": 0,
+  "file_statistics": {
+    "pdf": 0,
+    "pptx": 1
+  },
+  "failed_file_details": [],
+  "settings": {
+    "fast_mode": false,
+    "clip_model_path": "F:\\Models\\clip-vit-base-patch32",
+    "supported_file_types": [
+      "pdf",
+      "pptx"
+    ],
+    "device": "cpu"
+  },
+  "results_summary": {
+    "total_results": 41,
+    "text_extractions": 13,
+    "image_extractions": 17,
+    "table_extractions": 4,
+    "formula_extractions": 7,
+    "code_extractions": 0
+  }
+}

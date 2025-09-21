@@ -1,8 +1,10 @@
 import os
 from flask import Blueprint, request, jsonify
 from werkzeug.utils import secure_filename
-from models.process_folder import build_multimodal_knowledge_graph
+from models.processor import process_multimodal_files
+from models.extractor_connector import output_to_neo4j
 from pathlib import Path
+
 
 UPLOAD_FOLDER = "input"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -28,17 +30,25 @@ def upload_file():
     save_path = os.path.join(UPLOAD_FOLDER, filename)
     file.save(save_path)
 
-    result = build_multimodal_knowledge_graph(
+    # 示例调用
+    result = process_multimodal_files(
+        input_dir=str(input_file_path),
+        output_dir=str(output_file_path),
+        clip_model_path=r"F:\Models\clip-vit-base-patch32",  # 可选：本地CLIP模型路径
+        fast_mode=False,  # 设置为True可跳过耗时的CLIP描述生成
+        file_types=['pdf', 'pptx']  # 支持的文件类型
+    )
+
+    # 调用示例
+    result = output_to_neo4j(
+        output_dir=str(output_file_path),
+        deepseek_api_key="sk-c28ec338b39e4552b9e6bded47466442",
         neo4j_uri="bolt://101.132.130.25:7687",
         neo4j_user="neo4j",
         neo4j_password="wangshuxvan@1",
-        deepseek_api_key="sk-c28ec338b39e4552b9e6bded47466442",
-        input_dir = input_file_path,
-        output_dir = output_file_path,
-        document_name="Arduino课程PPT",
-        fast_mode=False,
-        clear_database=True,
-        verbose=True
+        ppt_name="Arduino课程PPT",
+        clear_database=False,  # 是否清空数据库
+        show_examples=True  # 是否显示查询示例
     )
 
     return jsonify({"success": True, "filename": filename})
