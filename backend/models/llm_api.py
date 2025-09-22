@@ -2,6 +2,7 @@
 import requests
 import re
 from .get_prompt import get_prompt_from_question
+from .logger import logger
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
@@ -24,9 +25,7 @@ def build_prompt(question: str, context: str) -> str:
 {context}
 
 【回答要求】：
-- 回答要简洁明了
 - 若参考信息不相关，请忽略
-- 如果问题不明确，请提示用户澄清
 """
     return prompt
 
@@ -48,11 +47,18 @@ def call_ollama(question):
     :return: 模型返回的回答
     """
 
-    context_list = get_prompt_from_question(question)
-    context = "\n".join(context_list)  # 每个元素换行
-    prompt = build_prompt(question, context)
+    # 从知识库获取 context
+    try:
+        context_list = get_prompt_from_question(question)
+        context = "\n".join(context_list) if context_list else ""
+        logger.info(f"生成 RAG context，长度 {len(context_list)} 条")
+    except Exception as e:
+        context = ""
+        logger.error(f"获取 RAG context 出错: {e}")
 
-    print(prompt)
+    prompt = build_prompt(question, context)
+    logger.info(f"发送给 Ollama 的 Prompt:\n{prompt}")
+
     payload = {
         "model": "deepseek-r1:1.5b",
         "prompt": prompt,
@@ -62,6 +68,9 @@ def call_ollama(question):
         resp = requests.post(OLLAMA_URL, json=payload)
         resp.raise_for_status()
         data = resp.json()
-        return data.get("response", 'No response key in output')
+        answer = data.get("response", "No response key in output")
+        logger.info(f"Ollama 返回结果: {answer[:200]}{'...' if len(answer) > 200 else ''}")
+        return answer
     except Exception as e:
+        logger.error(f"调用 Ollama 出错: {e}")
         return f"调用 Ollama 出错: {e}"
