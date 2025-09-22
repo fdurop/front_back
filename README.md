@@ -1,12 +1,140 @@
 前端
-# 安装依赖
-pip install -r requirements.txt
+这是 **fdurop 智能问答助手** 的前端部分，包含学生端与教师端两个界面，支持在线问答、身份切换、文件上传等功能。
 
-# 数据库初始化
-python manage.py migrate
+## 📂 项目结构
 
-# 启动开发服务器
+```
+
+frontend/
+├── templates/              # Django 模板文件夹
+│   ├── index.html          # 学生界面
+│   ├── teacher.html        # 教师界面
+│   └── base.html           # 公共布局（可选）
+│
+├── static/                 # 静态资源
+│   ├── css/
+│   │   ├── style.css       # 学生界面样式
+│   │   ├── teacher.css     # 教师界面样式
+│   │   └── common.css      # 公共样式（可选）
+│   │
+│   └── js/
+│       ├── chat.js         # 学生界面逻辑（消息发送、显示）
+│       ├── qa.js           # 回答渲染优化（支持段落、公式）
+│       ├── teacher.js      # 教师上传逻辑
+│       └── header-loader.js# 公共 header 逻辑（如身份切换）
+│
+└── README.md               # 当前文档
+
+````
+
+## 🚀 功能说明
+
+### 学生界面（`index.html`）
+- **问答输入**：支持输入问题并发送。
+- **身份切换**：可在“学生 / 教师”间切换。
+- **清空对话**：清空当前消息。
+- **数学公式支持**：集成 MathJax，支持 `$...$` 行内和 `$$...$$` 块级公式。
+- **安全渲染**：集成 DOMPurify 防止 XSS。
+
+### 教师界面（`teacher.html`）
+- **身份切换**：一键切换回学生界面。
+- **文件上传**：
+  - 支持 **选择文件** 和 **拖拽上传**。
+  - 文件类型支持：`PDF, Word, PPT, 图片, TXT`。
+  - 文件列表展示：已上传的文件显示在列表中。
+  - 上传进度条：显示上传进度（支持模拟和真实上传）。
+- **清空文件列表**：快速清理已选文件。
+
+### 公共功能
+- **角色管理**：身份信息存储在 `localStorage`，跨页面保持一致。
+- **后端 API 地址管理**（学生界面可配置）。
+- **响应式设计**：在桌面和移动端均可使用。
+
+## ⚙️ 使用方法
+
+### 1. 克隆仓库
+```bash
+git clone https://github.com/your-repo/fdurop-frontend.git
+cd fdurop-frontend
+````
+
+### 2. 配置 Django 静态文件
+
+在 `settings.py` 中确认：
+
+```python
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "frontend/static"]
+TEMPLATES[0]['DIRS'] = [BASE_DIR / "frontend/templates"]
+```
+
+### 3. 启动 Django
+
+```bash
 python manage.py runserver
+```
+
+然后访问：
+
+* 学生界面：[http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+* 教师界面：[http://127.0.0.1:8000/teacher/](http://127.0.0.1:8000/teacher/)
+
+### 4. 前端构建依赖（可选）
+
+如果需要进一步优化前端，可以使用 npm/yarn 管理依赖：
+
+```bash
+npm init -y
+npm install dompurify
+npm install mathjax
+```
+
+然后在 HTML 中引入对应的依赖。
+
+## 🧑‍💻 开发指南
+
+* **添加新功能**：
+
+  1. 在 `templates/` 中新增页面。
+  2. 在 `static/css/` 中添加样式文件。
+  3. 在 `static/js/` 中编写交互逻辑。
+
+* **对接后端上传接口**：
+  修改 `teacher.js` 中的上传逻辑：
+
+  ```javascript
+  const formData = new FormData();
+  files.forEach(f => formData.append('files', f));
+
+  fetch('/api/upload', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => console.log('上传成功', data))
+  .catch(err => console.error('上传失败', err));
+  ```
+
+* **数学公式渲染**：
+  学生端的 `qa.js` 在接收消息后会触发：
+
+  ```javascript
+  document.dispatchEvent(new Event("newMessage"));
+  ```
+
+  然后 `MathJax.typesetPromise()` 会进行公式渲染。
+
+---
+
+## 📌 待办（TODO）
+
+* [ ] 对接后端文件上传接口。
+* [ ] 优化上传文件类型校验。
+* [ ] 消息持久化（刷新后保留历史记录）。
+* [ ] 更丰富的教师界面（文件管理 / 题库管理）。
+
+---
+
 
 后端
 ## 🔧 项目简介
